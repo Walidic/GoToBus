@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -22,7 +23,7 @@ public class User implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int Id;
+	private int user_Id;
 	@NotNull
 	private String username;
 	@NotNull
@@ -39,10 +40,13 @@ public class User implements Serializable{
 		inverseJoinColumns=@JoinColumn(name="trip_id"))
 	private Set<Trip> trips;
 	
+	@OneToMany(mappedBy="user")
+	private Set<Notification> notifications;
+	
 	public User() {}
 	
 	public void setId(int Id) {
-		this.Id = Id;
+		this.user_Id = Id;
 	}
 	
 	public void setUsername(String username) {
@@ -61,11 +65,24 @@ public class User implements Serializable{
 		this.role = role;
 	}
 	
+	public void addTrip(Trip trip) {
+		trips.add(trip);
+	}
+	
+	public void addNotification(Notification notification) {
+		notifications.add(notification);
+		System.out.println(notification);
+	}
+	
 	public int getId() {
-		return Id;
+		return user_Id;
 	}
 	public Set<Trip> getTrips(){
 		return trips;
+	}
+	
+	public Set<Notification> getNotifications(){
+		return notifications;
 	}
 	
 	public String getUsername() {
@@ -82,10 +99,6 @@ public class User implements Serializable{
 	
 	public String getRole() {
 		return role;
-	}
-	
-	public void addTrip(Trip trip) {
-		trips.add(trip);
 	}
 
 }

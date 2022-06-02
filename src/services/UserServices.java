@@ -1,5 +1,6 @@
 package services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -9,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import entities.Booking;
+import entities.Notification;
 import entities.Trip;
 import entities.User;
 @Stateful
@@ -58,12 +60,17 @@ public class UserServices {
 		}
 		bookingUser.addTrip(bookingTrip);
 		bookingTrip.addUser(bookingUser);
-		System.out.println(bookingUser.getUsername());
-		System.out.println(bookingTrip.getAvailableSeats());
 		Booking booking = new Booking();
 		booking.setTrip_id(bookingTrip.getId());
 		booking.setUser_id(bookingUser.getId());
 		entityManager.persist(booking);
+		Notification notification = new Notification();
+		notification.setMessage("You have booked a trip form "+ bookingTrip.getFromStation().getName() + " to " + bookingTrip.getToStation().getName() + "successfully");
+		Date notifDate = new Date();
+		notification.setNotificationDateTime(notifDate);
+		System.out.println(notification.getMessage());
+		entityManager.persist(notification);
+		bookingUser.addNotification(notification);
 		return true;
 	}
 	public Set<Trip> getUserTrips(int id){
@@ -73,6 +80,18 @@ public class UserServices {
 		for(User user:result) {
 			if(user.getId()==id) {
 				return user.getTrips();
+			}
+		}
+		return null;
+	}
+	
+	public Set<Notification> getNotifications(int id){
+		List<User> result;
+		TypedQuery<User> query = entityManager.createQuery("Select c from User C", User.class);
+		result = query.getResultList();
+		for(User user:result) {
+			if(user.getId()==id) {
+				return user.getNotifications();
 			}
 		}
 		return null;
