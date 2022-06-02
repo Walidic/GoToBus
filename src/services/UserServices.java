@@ -29,6 +29,7 @@ public class UserServices {
 		for(User user:result) {
 			if(user.getUsername().equals(username)) {
 				if(user.getPassword().equals(password)) {
+					//user.setLogged_in(true);
 					return true;
 				}
 			}
@@ -58,8 +59,16 @@ public class UserServices {
 		if ((bookingUser==null) || (bookingTrip==null)) {
 			return false;
 		}
+		
+		//if(!bookingUser.isLogged_in()) {
+			//return false;
+		//}
+		
+		if(!bookingTrip.addUser(bookingUser)) {
+			return false;
+		}		
+		
 		bookingUser.addTrip(bookingTrip);
-		bookingTrip.addUser(bookingUser);
 		Booking booking = new Booking();
 		booking.setTrip_id(bookingTrip.getId());
 		booking.setUser_id(bookingUser.getId());

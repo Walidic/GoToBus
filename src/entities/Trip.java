@@ -1,13 +1,10 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -91,8 +88,12 @@ public class Trip implements Serializable{
 		return departureTime;
 	}
 	
-	public void addUser(User user) {
+	public boolean addUser(User user) {
+		if (availableSeats == 0) {
+			return false;
+		}
 		users.add(user);
 		availableSeats--;
+		return true;
 	}
 }

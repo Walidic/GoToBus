@@ -1,5 +1,6 @@
 package REST;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.ws.rs.Consumes;
@@ -16,7 +17,7 @@ import services.TripServices;
 @Path("trip")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-
+//@RolesAllowed("admin")
 public class TripEndpoint {
 	@EJB
 	TripServices tripService;

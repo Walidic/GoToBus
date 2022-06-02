@@ -1,12 +1,10 @@
 package entities;
 
+
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -32,6 +31,8 @@ public class User implements Serializable{
 	private String fullName;
 	@NotNull
 	private String role;
+	
+	//private boolean logged_in = false;
 	
 	@ManyToMany
 	@JoinTable(
@@ -100,5 +101,13 @@ public class User implements Serializable{
 	public String getRole() {
 		return role;
 	}
+
+	//public boolean isLogged_in() {
+	//	return logged_in;
+	//}
+
+	//public void setLogged_in(boolean logged_in) {
+	//	this.logged_in = logged_in;
+	//}
 
 }

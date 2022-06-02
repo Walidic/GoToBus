@@ -15,7 +15,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import entities.Notification;
-import entities.Trip;
 import services.UserServices;
 
 @Stateful

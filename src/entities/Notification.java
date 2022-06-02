@@ -42,6 +42,10 @@ public class Notification implements Serializable{
 		this.notificationDateTime = notificationDateTime;
 	}
 	
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	public int getId() {
 		return Id;
 	}

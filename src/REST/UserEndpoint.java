@@ -23,7 +23,7 @@ public class UserEndpoint {
 	@POST
 	public Response createUSer(User user) {
 		userService.createUser(user);
-		return Response.ok(user).build();
+		return Response.ok().build();
 	}
 	
 }
