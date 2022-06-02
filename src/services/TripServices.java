@@ -65,16 +65,11 @@ public class TripServices{
 		
 		List<Trip> matchingTrips = new ArrayList<Trip> ();
 		
-		System.out.println(start);
-		System.out.println(end);
-		System.out.println(fromStationId);
-		System.out.println(toStationId);
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		
 		Date startDate = null;
 		try {
 			startDate = formatter.parse(start);
-			System.out.println(startDate);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -83,7 +78,6 @@ public class TripServices{
 		Date endDate = null;
 		try {
 			endDate = formatter.parse(end);
-			System.out.println(endDate);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,9 +85,6 @@ public class TripServices{
 		
 		
 		for(Trip trip:result) {
-			System.out.println(trip.getDepartureTime());
-			System.out.println(trip.getFromStation().getId());
-			System.out.println(trip.getToStation().getId());
 			if(trip.getFromStation().getId() == fromStationId) {
 				if (trip.getToStation().getId() == toStationId) {
 					if (startDate.compareTo(trip.getDepartureTime()) < 1) {

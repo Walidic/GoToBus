@@ -1,11 +1,18 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -24,6 +31,13 @@ public class User implements Serializable{
 	private String fullName;
 	@NotNull
 	private String role;
+	
+	@ManyToMany
+	@JoinTable(
+		name="USERXTRIP",
+		joinColumns=@JoinColumn(name="user_id"),
+		inverseJoinColumns=@JoinColumn(name="trip_id"))
+	private Set<Trip> trips;
 	
 	public User() {}
 	
@@ -65,6 +79,10 @@ public class User implements Serializable{
 	
 	public String getRole() {
 		return role;
+	}
+	
+	public void addTrip(Trip trip) {
+		trips.add(trip);
 	}
 
 }

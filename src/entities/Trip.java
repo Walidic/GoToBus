@@ -1,12 +1,17 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -31,6 +36,10 @@ public class Trip implements Serializable{
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date departureTime;
+	
+	@ManyToMany(mappedBy="trips")
+	private Set<User> users;
+	
 	
 	public Trip() {}
 	
@@ -80,5 +89,10 @@ public class Trip implements Serializable{
 	
 	public Date getDepartureTime() {
 		return departureTime;
+	}
+	
+	public void addUser(User user) {
+		users.add(user);
+		availableSeats--;
 	}
 }
