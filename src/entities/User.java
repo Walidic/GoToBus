@@ -64,6 +64,9 @@ public class User implements Serializable{
 	public int getId() {
 		return Id;
 	}
+	public Set<Trip> getTrips(){
+		return trips;
+	}
 	
 	public String getUsername() {
 		return username;

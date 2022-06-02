@@ -1,6 +1,7 @@
 package services;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
@@ -64,6 +65,17 @@ public class UserServices {
 		booking.setUser_id(bookingUser.getId());
 		entityManager.persist(booking);
 		return true;
+	}
+	public Set<Trip> getUserTrips(int id){
+		List<User> result;
+		TypedQuery<User> query = entityManager.createQuery("Select c from User C", User.class);
+		result = query.getResultList();
+		for(User user:result) {
+			if(user.getId()==id) {
+				return user.getTrips();
+			}
+		}
+		return null;
 	}
 	
 }
