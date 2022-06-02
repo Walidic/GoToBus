@@ -1,6 +1,4 @@
 package REST;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
@@ -24,10 +22,8 @@ public class TripEndpoint {
 	TripServices tripService;
 	
 	@POST
-	public Response createTrip(String body) {
-		System.out.println("here");	
+	public Response createTrip(String body) {	
 		JSONObject obj = new JSONObject(body);
-		System.out.println("here");	
 		String fromStation = obj.getString("fromStation");
 		String toStation = obj.getString("toStation");
 		int availableSeats = obj.getInt("availableSeats");

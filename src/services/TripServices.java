@@ -2,6 +2,7 @@ package services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -55,5 +56,54 @@ public class TripServices{
 		}
 		entityManager.persist(trip);
 	}
-
+	
+	
+	public List<Trip> searchTrips(String start, String end, int fromStationId, int toStationId) {
+		List<Trip> result;
+		TypedQuery<Trip> query = entityManager.createQuery("select c from Trip C", Trip.class);
+		result = query.getResultList();
+		
+		List<Trip> matchingTrips = new ArrayList<Trip> ();
+		
+		System.out.println(start);
+		System.out.println(end);
+		System.out.println(fromStationId);
+		System.out.println(toStationId);
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		
+		Date startDate = null;
+		try {
+			startDate = formatter.parse(start);
+			System.out.println(startDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Date endDate = null;
+		try {
+			endDate = formatter.parse(end);
+			System.out.println(endDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		for(Trip trip:result) {
+			System.out.println(trip.getDepartureTime());
+			System.out.println(trip.getFromStation().getId());
+			System.out.println(trip.getToStation().getId());
+			if(trip.getFromStation().getId() == fromStationId) {
+				if (trip.getToStation().getId() == toStationId) {
+					if (startDate.compareTo(trip.getDepartureTime()) < 1) {
+						if(endDate.compareTo(trip.getDepartureTime()) >= 0) {
+						matchingTrips.add(trip);
+						}
+					}
+				}
+			}
+		}
+		return matchingTrips;
+	}
 }

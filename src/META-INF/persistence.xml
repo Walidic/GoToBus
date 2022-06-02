@@ -5,6 +5,7 @@
 		<class>entities.User</class>
 		<class>entities.Station</class>
 		<class>entities.Trip</class>
+		<class>entities.Notification</class>
 		<properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
