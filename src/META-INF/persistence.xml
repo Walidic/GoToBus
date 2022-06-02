@@ -3,6 +3,7 @@
 	<persistence-unit name="gotobus" transaction-type="JTA">
 		<jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
 		<class>entities.User</class>
+		<class>entities.Station</class>
 		<properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
             <property name="hibernate.hbm2ddl.auto" value="update" />

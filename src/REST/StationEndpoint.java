@@ -9,21 +9,22 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import entities.User;
-import services.UserServices;
+import entities.Station;
+import services.StationServices;
+
 @Stateful
-@Path("user")
+@Path("station")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class UserEndpoint {
+public class StationEndpoint {
 	
 	@EJB
-	UserServices userService;
+	StationServices stationService;
 	
 	@POST
-	public Response createUSer(User user) {
-		userService.createUser(user);
+	public Response creatStation(Station station) {
+		
+		stationService.createStation(station);
 		return Response.ok().build();
 	}
-	
 }
