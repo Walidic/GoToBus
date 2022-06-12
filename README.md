@@ -1,6 +1,7 @@
 # GoToBus
  # GoToBus Red Hat Application Development I: Programming in Java EE 7.0 Project Assignment 
 A BackEnd system that provides several Web Services
+
 System Functionalities:
 ● System should provide user management subsystem for New User Registration and Login
 ● User can have two different roles Client and Administrator roles
